@@ -23,7 +23,7 @@ namespace ValidareDate.Controllers
         
         public FileResult Download(string fileName)
         {
-            string path = Server.MapPath($"~/Download/Iesiri/{fileName}");
+            string path = Server.MapPath($"~/Download/{fileName}");
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
@@ -161,7 +161,6 @@ namespace ValidareDate.Controllers
 
         public ActionResult ProcessFiles()
         {
-            string file = "";
             var iesiri = IesiriHelper.verificaFacturi();
             if(iesiri.Count == 0)
             {
@@ -169,8 +168,10 @@ namespace ValidareDate.Controllers
             }
             else
             {
-                file = IesiriHelper.genereazaFisierIesiri(iesiri, Server);
-                ViewBag.file = Path.GetFileName(file);
+                var fileIesiri = DBFHelper.genereazaFisierIesiri(iesiri, Server);
+                var fileClienti = DBFHelper.genereazaFisierClienti(Server);
+                ViewBag.fileIesiri = Path.GetFileName(fileIesiri);
+                ViewBag.fileClienti = Path.GetFileName(fileClienti);
             }
 
             return View();

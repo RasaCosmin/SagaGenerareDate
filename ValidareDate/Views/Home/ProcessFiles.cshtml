@@ -5,7 +5,17 @@
 
 <h2>ProcessFile</h2>
 
-<span style="color:green">@ViewBag.file</span>
+
 <span style="color:red">@ViewBag.ErrorProcess</span>
 
-<input type="button" value="Click here to download" onclick="location.href='@Url.Action("Download", new { fileName = ViewBag.file})'" />
+<div class="row">
+    <span style="color:green">@ViewBag.fileIesiri</span>
+
+    <input type="button" value="Download Iesiri" onclick="location.href='@Url.Action("Download", new { fileName = "Iesiri/"+ViewBag.fileIesiri})'" />
+</div>
+
+<div class="row">
+    <span style="color:green">@ViewBag.fileClienti</span>
+
+    <input type="button" value="Download Clienti" onclick="location.href='@Url.Action("Download", new { fileName = "Clienti/"+ViewBag.fileClienti})'" />
+</div>

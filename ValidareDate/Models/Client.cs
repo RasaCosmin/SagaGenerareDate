@@ -13,6 +13,7 @@ namespace ValidareDate.Models
         public string cod { get; set; }
         public string denumire { get; set; }
         public string cod_fiscal { get; set; }
+        public string reg_com { get; set; }
         public string analitic { get; set; }
         public string tara { get; set; }
         public string judet { get; set; }
@@ -22,7 +23,6 @@ namespace ValidareDate.Models
         //public string tel { get; set; }
         //public string email { get; set; }
         //public string grupa { get; set; }
-        public string reg_com { get; set; }
         //public string delegat { get; set; }
         //public string bi_serie { get; set; }
         //public string bi_numar { get; set; }
@@ -71,7 +71,7 @@ namespace ValidareDate.Models
             //inf_supl = row["inf_supl"].ToString();
             //agent = row["agent"].ToString();
             //tip_tert = row["tip_tert"].ToString();
-            //is_tva = Convert.ToInt32(row["is_tva"]) == 1;
+            is_tva = Convert.ToInt32(row["is_tva"]) == 1;
             //blocat = Convert.ToDouble(row["blocat"]);
             //data_v_tva = row["data_v_tva"].ToString();
             //cb_card = Convert.ToDouble(row["cb_card"]);

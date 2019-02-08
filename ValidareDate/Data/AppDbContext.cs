@@ -15,5 +15,6 @@ namespace ValidareDate.Data
 
         public DbSet<Client> Clienti { get; set; }
         public DbSet<Factura> Facturi { get; set; }
+        public DbSet<Judet> Judete { get; set; }
     }
 }
