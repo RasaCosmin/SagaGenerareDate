@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Clienti";
+}
+
+<h2>Clienti</h2>
+@using (Html.BeginForm("Clienti", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <span>Incarca fisierul cu facturi:</span>
+    <input type="file" name="postedFile" />
+    <hr />
+    <input type="submit" value="Upload" />
+    <span style="color:green">@ViewBag.Message</span>
+    <span style="color:red">@ViewBag.Error</span>
+}
+

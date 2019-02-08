@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "ProcessFile";
+}
+
+<h2>ProcessFile</h2>
+
+<span style="color:green">@ViewBag.file</span>
+<span style="color:red">@ViewBag.ErrorProcess</span>
+
+<input type="button" value="Click here to download" onclick="location.href='@Url.Action("Download", new { fileName = ViewBag.file})'" />
