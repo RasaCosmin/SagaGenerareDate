@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -43,6 +44,12 @@ namespace ValidareDate.Models
         //public double c_limit { get; set; }
 
             public bool isNew { get; set; }
+
+        [NotMapped]
+        public bool shouldCheckAnaf { get; set; }
+
+        [NotMapped]
+        public string invalidCnp { get; set; }
 
         internal void ConvertFromDataRow(DataRow row)
         {

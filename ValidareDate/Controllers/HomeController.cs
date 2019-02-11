@@ -6,6 +6,7 @@ using System.Data.Entity.Migrations;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ValidareDate.Data;
@@ -159,9 +160,9 @@ namespace ValidareDate.Controllers
         }
         
 
-        public ActionResult ProcessFiles()
+        public async Task<ActionResult> ProcessFiles()
         {
-            var iesiri = IesiriHelper.verificaFacturi();
+            var iesiri = await IesiriHelper.verificaFacturi();
             if(iesiri.Count == 0)
             {
                 ViewBag.ErrorProcess = "nu exista nicio iesire";
