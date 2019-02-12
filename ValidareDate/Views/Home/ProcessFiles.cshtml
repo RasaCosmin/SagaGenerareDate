@@ -11,11 +11,11 @@
 <div class="row">
     <span style="color:green">@ViewBag.fileIesiri</span>
 
-    <input type="button" value="Download Iesiri" onclick="location.href='@Url.Action("Download", new { fileName = "Iesiri/"+ViewBag.fileIesiri})'" />
+    <input type="button" value="Download Iesiri" onclick="location.href='@Url.Action("Download", new { filePath = "Iesiri/"+ViewBag.fileIesiri})'" />
 </div>
 
 <div class="row">
     <span style="color:green">@ViewBag.fileClienti</span>
 
-    <input type="button" value="Download Clienti" onclick="location.href='@Url.Action("Download", new { fileName = "Clienti/"+ViewBag.fileClienti})'" />
+    <input type="button" value="Download Clienti" onclick="location.href='@Url.Action("Download", new { filePath = "Clienti/"+ViewBag.fileClienti})'" />
 </div>

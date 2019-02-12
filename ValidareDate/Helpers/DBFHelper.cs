@@ -95,9 +95,8 @@ namespace ValidareDate.Helpers
             {
                 Directory.CreateDirectory(path);
             }
-
             var writer = new DBFWriter();
-            
+
             var codField = new DBFField("COD", NativeDbType.Char, 8);
             var denumireField = new DBFField("DENUMIRE", NativeDbType.Char, 64);
             var codFiscalField = new DBFField("COD_FISCAL", NativeDbType.Char, 20);
@@ -107,8 +106,10 @@ namespace ValidareDate.Helpers
             var judetField = new DBFField("JUDET", NativeDbType.Char, 36);
             var taraField = new DBFField("TARA", NativeDbType.Char, 2);
             var isTvaField = new DBFField("IS_TVA", NativeDbType.Numeric, 1, 0);
+            var tipTertField = new DBFField("TIP_TERT", NativeDbType.Char, 1);
+            var nullFlagField = new DBFField("N_NULLFLAG", NativeDbType.Numeric, 1, 0);
 
-            writer.Fields = new[] { codField, denumireField, codFiscalField, regComField, analiticIField, adresaField, judetField, taraField, isTvaField };
+            writer.Fields = new[] { codField, denumireField, codFiscalField, regComField, analiticIField, adresaField, judetField, taraField, isTvaField, tipTertField, nullFlagField };
 
 
             using (var dbContext = new AppDbContext())
@@ -117,7 +118,7 @@ namespace ValidareDate.Helpers
 
                 foreach (var client in clienti)
                 {
-                    var record = new object[] { client.cod, client.denumire, client.cod_fiscal, client.reg_com, client.analitic, client.adresa, client.judet, client.tara, client.is_tva?1:0};
+                    var record = new object[] { client.cod, client.denumire, client.cod_fiscal, client.reg_com, client.analitic, client.adresa, client.judet, client.tara, client.is_tva ? 1 : 0, "", 0 };
                     writer.AddRecord(record);
                 }
 
@@ -130,6 +131,7 @@ namespace ValidareDate.Helpers
 
                     writer.Write(fos);
                 }
+
             }
 
             return filePath;

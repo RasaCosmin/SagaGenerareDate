@@ -22,9 +22,12 @@ namespace ValidareDate.Controllers
             return View();
         }
         
-        public FileResult Download(string fileName)
+        public FileResult Download(string filePath) 
         {
-            string path = Server.MapPath($"~/Download/{fileName}");
+            string path = Server.MapPath($"~/Download/{filePath}");
+
+            string fileName = Path.GetFileName(path);
+
             byte[] fileBytes = System.IO.File.ReadAllBytes(path);
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
