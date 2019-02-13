@@ -81,6 +81,7 @@ namespace ValidareDate.Helpers
             {
 
                 writer.Write(fos);
+                writer.Close();
             }
 
             return filePath;
@@ -107,7 +108,7 @@ namespace ValidareDate.Helpers
             var taraField = new DBFField("TARA", NativeDbType.Char, 2);
             var isTvaField = new DBFField("IS_TVA", NativeDbType.Numeric, 1, 0);
             var tipTertField = new DBFField("TIP_TERT", NativeDbType.Char, 1);
-            var nullFlagField = new DBFField("N_NULLFLAG", NativeDbType.Numeric, 1, 0);
+            var nullFlagField = new DBFField("_NullFlags", NativeDbType.Numeric, 1, 0);
 
             writer.Fields = new[] { codField, denumireField, codFiscalField, regComField, analiticIField, adresaField, judetField, taraField, isTvaField, tipTertField, nullFlagField };
 
@@ -130,6 +131,7 @@ namespace ValidareDate.Helpers
                 {
 
                     writer.Write(fos);
+                    writer.Close();
                 }
 
             }
