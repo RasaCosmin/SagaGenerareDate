@@ -19,17 +19,18 @@ namespace ValidareDate.Controllers
     {
         public ActionResult Index()
         {
+            using (var dbContext = new AppDbContext())
+            {
+                if (dbContext.Facturi.ToList().Count > 0)
+                {
+                    ViewBag.showEraseBtn = true;
+                }
+                else
+                {
+                    ViewBag.showEraseBtn = false;
+                }
+            }
             return View();
-        }
-        
-        public FileResult Download(string filePath) 
-        {
-            string path = Server.MapPath($"~/Download/{filePath}");
-
-            string fileName = Path.GetFileName(path);
-
-            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
-            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
         [HttpPost]
@@ -91,8 +92,19 @@ namespace ValidareDate.Controllers
             {
                 ViewBag.Error = errorMessage;
             }
-
+            ViewBag.showEraseBtn = false;
             return View();
+        }
+
+        public ActionResult EmptyFacturi()
+        {
+            using (var dbContext = new AppDbContext())
+            {
+                if (dbContext.Facturi.ToList().Count > 0)
+                    dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [Facturas]");
+            }
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Clienti()
@@ -187,6 +199,16 @@ namespace ValidareDate.Controllers
                 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={filePath};Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\""
                 : $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
             return connString;
+        }
+
+        public FileResult Download(string filePath)
+        {
+            string path = Server.MapPath($"~/Download/{filePath}");
+
+            string fileName = Path.GetFileName(path);
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }
 }

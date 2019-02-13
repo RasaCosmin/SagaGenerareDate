@@ -4,19 +4,31 @@
 
 <h2>Facturi</h2>
 
+
+@if (ViewBag.showEraseBtn)
+{
 <div>
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <span>Incarca fisierul cu facturi:</span>
-        <input type="file" name="postedFile" />
-        <hr />
-        <input type="submit" value="Upload" />
-        <span style="color:green">@ViewBag.Message</span>
-    }
-
+    <span>Pentru a putea incarca un nou fisier cu facturi, facturile precedente trebuie sterse din baza de date.</span>
+    <input type="button" value="Sterge facturile din baza de date" onclick="location.href='@Url.Action("EmptyFacturi", "Home")'" />
 </div>
+}
 
-<br />
-<input type="button" value="Genereaza Fisierele" onclick="location.href='@Url.Action("ProcessFiles","Home")'" />
 
-<br />
+    <div>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <span>Incarca fisierul cu facturi:</span>
+            <input type="file" name="postedFile" />
+            <hr />
+            <input type="submit" value="Upload" />
+            <span style="color:green">@ViewBag.Message</span>
+        }
+
+    </div>
+
+    <br />
+
+    <div>
+        <input type="button" value="Genereaza Fisierele" onclick="location.href='@Url.Action("ProcessFiles", "Home")'" />
+    </div>
+    <br />
