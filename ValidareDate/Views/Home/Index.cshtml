@@ -14,17 +14,18 @@
 }
 
 
-    <div>
-        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <span>Incarca fisierul cu facturi:</span>
-            <input type="file" name="postedFile" />
-            <hr />
-            <input type="submit" value="Upload" />
-            <span style="color:green">@ViewBag.Message</span>
-        }
+<div>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <span>Incarca fisierul cu facturi:</span>
+        <input type="file" name="postedFile" />
+        <hr />
+        <input type="submit" value="Upload" />
+        <span style="color:green">@ViewBag.Message</span>
+        <span style="color:red">@ViewBag.Error</span>
+    }
 
-    </div>
+</div>
 
     <br />
 

@@ -9,7 +9,7 @@ namespace ValidareDate.Helpers
 {
     public class FileHelper
     {
-        public static DataTable ConvertExcelToDataTable(string connString, string sheetName)
+        public static DataTable ConvertExcelToDataTable(string connString, string sheetName) 
         {
             OleDbConnection dbConn = new OleDbConnection(connString);
 
@@ -28,7 +28,7 @@ namespace ValidareDate.Helpers
                 }
             }catch(Exception ex)
             {
-                
+                throw ex;
             }
             finally
             {

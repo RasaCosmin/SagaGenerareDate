@@ -50,7 +50,7 @@ namespace ValidareDate.Helpers
 
             foreach (var iesire in iesiri)
             {
-                var data = DateTime.ParseExact(iesire.Data, "dd-MMM-yy HH:mm:ss",
+                var data = DateTime.Parse(iesire.Data,
                                    System.Globalization.CultureInfo.InvariantCulture);
 
                 if (data < minDate)
@@ -58,7 +58,7 @@ namespace ValidareDate.Helpers
                     minDate = data;
                 }
 
-                var scadent = DateTime.ParseExact(iesire.Data, "dd-MMM-yy HH:mm:ss",
+                var scadent = DateTime.Parse(iesire.Data,
                                   System.Globalization.CultureInfo.InvariantCulture);
 
                 if (scadent > maxDate)

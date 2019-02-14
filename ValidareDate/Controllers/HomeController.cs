@@ -59,24 +59,31 @@ namespace ValidareDate.Controllers
 
                     string connString = getConnStringByExtension(extension, filePath);
 
-                    var dt = FileHelper.ConvertExcelToDataTable(connString, sheetName);
-
-                    var dbContext = new AppDbContext();
-
-                    var facturi = new List<Factura>();
-
-                    foreach (DataRow row in dt.Rows)
+                    try
                     {
-                        var factura = new Factura();
-                        factura.ConvertFromDataRow(row);
-                        facturi.Add(factura);
+                        var dt = FileHelper.ConvertExcelToDataTable(connString, sheetName);
+
+                        var dbContext = new AppDbContext();
+
+                        var facturi = new List<Factura>();
+
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            var factura = new Factura();
+                            factura.ConvertFromDataRow(row);
+                            facturi.Add(factura);
+                        }
+
+                        dbContext.Facturi.AddOrUpdate(facturi.ToArray());
+                        dbContext.SaveChanges();
+
+                        ViewBag.Message = "Fisierul cu facturi fost procesat";
+                        ViewBag.FilePath = filePath;
                     }
-
-                    dbContext.Facturi.AddOrUpdate(facturi.ToArray());
-                    dbContext.SaveChanges();
-
-                    ViewBag.Message = "Fisierul cu facturi fost procesat";
-                    ViewBag.FilePath = filePath;
+                    catch (Exception ex)
+                    {
+                        errorMessage = ex.Message;
+                    }
                 }
                 else
                 {
@@ -138,24 +145,30 @@ namespace ValidareDate.Controllers
 
                     string connString = getConnStringByExtension(extension, filePath);
 
-                    var dt = FileHelper.ConvertExcelToDataTable(connString, sheetName);
-
-                    var dbContext = new AppDbContext();
-
-                    var clientsList = new List<Client>();
-
-                    foreach (DataRow row in dt.Rows)
+                    try
                     {
-                        var client = new Client();
-                        client.ConvertFromDataRow(row);
-                        clientsList.Add(client);
+                        var dt = FileHelper.ConvertExcelToDataTable(connString, sheetName);
+
+                        var dbContext = new AppDbContext();
+
+                        var clientsList = new List<Client>();
+
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            var client = new Client();
+                            client.ConvertFromDataRow(row);
+                            clientsList.Add(client);
+                        }
+
+                        dbContext.Clienti.AddOrUpdate(clientsList.ToArray());
+                        dbContext.SaveChanges();
+
+                        ViewBag.Message = "Fisierul cu clienti fost procesat";
+                        ViewBag.FilePath = filePath;
+                    }catch(Exception ex)
+                    {
+                        errorMessage = ex.Message;
                     }
-
-                    dbContext.Clienti.AddOrUpdate(clientsList.ToArray());
-                    dbContext.SaveChanges();
-
-                    ViewBag.Message = "Fisierul cu clienti fost procesat";
-                    ViewBag.FilePath = filePath;
                 }
                 else
                 {
@@ -173,12 +186,12 @@ namespace ValidareDate.Controllers
             }
             return View();
         }
-        
+
 
         public async Task<ActionResult> ProcessFiles()
         {
             var iesiri = await IesiriHelper.verificaFacturi();
-            if(iesiri.Count == 0)
+            if (iesiri.Count == 0)
             {
                 ViewBag.ErrorProcess = "nu exista nicio iesire";
             }
